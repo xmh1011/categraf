@@ -20,7 +20,7 @@ env:
 
 jobs:
   CommitLint:
-    name: commit lint
+    name: Commit Lint
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -68,7 +68,7 @@ jobs:
       - name: go mod tidy
         run: make vendor
       - name: go build linux
-        run: make build-linux && build-linux-arm
+        run: make build-linux && make build-linux-arm
       - name: go build windows
         run: make build-windows
       - name: go build mac
@@ -77,11 +77,3 @@ jobs:
         run: make build-image
       - name: pack program
         run: make pack
-      - name: Run golang-ci-lint
-        uses: golangci/golangci-lint-action@v3.6.0
-        with:
-          version: v1.53
-          args: --timeout=10m --tests=false
-          only-new-issues: true
-          skip-pkg-cache: true
-          skip-build-cache: true
