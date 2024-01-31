@@ -73,7 +73,3 @@ jobs:
         run: make build-windows
       - name: go build mac
         run: make build-mac && make build-mac-arm
-      - name: build image
-        run: make build-image
-      - name: pack program
-        run: make pack
