@@ -11,9 +11,6 @@ on:
       - 'k8s/**'
       - 'scripts/**'
       - '**.md'
-      - '**.y'
-      - 'logs_test.go'
-      - 'pipelines_test.go'
       - '.gitignore'
 
 env:
