@@ -53,3 +53,35 @@ jobs:
           only-new-issues: true
           skip-pkg-cache: true
           skip-build-cache: true
+  BuildCheck:
+    name: "Go Build Check"
+    needs: GoLint
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: WillAbides/setup-go-faster@v1.7.0
+        with:
+          go-version: "1.20"
+      - name: go mod tidy
+        run: make vendor
+      - name: go build linux
+        run: make build-linux && build-linux-arm
+      - name: go build windows
+        run: make build-windows
+      - name: go build mac
+        run: make build-mac && make build-mac-arm
+      - name: build image
+        run: make build-image
+      - name: pack program
+        run: make pack
+      - name: Run golang-ci-lint
+        uses: golangci/golangci-lint-action@v3.6.0
+        with:
+          version: v1.53
+          args: --timeout=10m --tests=false
+          only-new-issues: true
+          skip-pkg-cache: true
+          skip-build-cache: true
