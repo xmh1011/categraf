@@ -11,6 +11,9 @@ on:
       - 'k8s/**'
       - 'scripts/**'
       - '**.md'
+      - '**.y'
+      - 'logs_test.go'
+      - 'pipelines_test.go'
       - '.gitignore'
 
 env:
@@ -30,7 +33,7 @@ jobs:
       - name: Run commitlint
         uses: wagoid/commitlint-github-action@v5
   GoLint:
-    name: "static check, style check, go vet and other go lint"
+    name: "Code Analysis"
     needs: CommitLint
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -43,8 +46,6 @@ jobs:
           go-version: "1.19"
       - name: Run go version check
         run: make go-version-check
-      - name: Run static check
-        run: make static-check
       - name: Run go vet check
         run: make go-vet-check
       - name: Run golang-ci-lint

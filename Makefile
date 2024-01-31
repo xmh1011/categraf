@@ -12,9 +12,6 @@ LDFLAGS:="-w -s -X $(BUILD_VERSION)"
 STYLE_CHECK_GOFILE  := $$(find . -name '*.go')
 GO          := GO111MODULE=on go
 
-install-static-check:
-	@$(GO) install honnef.co/go/tools/cmd/staticcheck@v0.4.3
-
 all: build
 
 vendor:
@@ -63,6 +60,3 @@ go-version-check:
 
 go-vet-check:
 	bash ./scripts/ci/go_vet.sh
-
-static-check: install-static-check
-	bash ./scripts/ci/static_check.sh

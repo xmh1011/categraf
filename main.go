@@ -307,8 +307,3 @@ func serviceProcess() error {
 	}
 	return nil
 }
-
-func test() {
-	jvhkgcvhk
-	dsfoe
-}
